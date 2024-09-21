@@ -1,7 +1,8 @@
 import { McLineChart, Options } from '@mcui/mccharts'
-
+import {GetData,ApiResponse,Forecast,CityInfo,WeatherData} from '../component/DataFetcher'
 @Component
 export struct WeatherChart {
+  @Link response:ApiResponse;
   // 初始化数据
   @State seriesOption: Options = new Options({
     xAxis:{

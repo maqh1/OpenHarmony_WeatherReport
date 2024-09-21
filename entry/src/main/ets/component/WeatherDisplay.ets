@@ -1,6 +1,8 @@
+import {GetData,ApiResponse,Forecast,CityInfo,WeatherData} from '../component/DataFetcher'
 
 @Component
 export struct WeatherDisplay {
+  @Link response:ApiResponse;
   @State weatherData:number=10; // 暂时使用一个数字
 
   build() {

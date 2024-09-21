@@ -10,6 +10,14 @@
     {
       "name": "apparent_background_blue",
       "value": "#210082FF"
+    },
+    {
+      "name": "button_selected_light",
+      "value": "#ADD8E6"
+    },
+    {
+      "name": "button_color",
+      "value": "#FFB8EAB9"
     }
   ]
 }

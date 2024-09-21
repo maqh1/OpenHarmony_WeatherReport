@@ -1,11 +1,15 @@
+import { SideBarMask } from './CityChooseMask';
 import { Province, City, CityData, cityData } from './data/CityDictionary';
 
 @Component
 export struct CustomSideBar {
-  @State selectedProvince: string = '';
-  @State selectedCity: string = '';
-  provinceScroller: Scroller = new Scroller();
-  cityScroller: Scroller = new Scroller();
+  @Link selectedProvince: string;
+  @Link selectedCity: string;
+  @Link cityCode:string;
+  @Link showSideBar:boolean;
+  @State proportion:string[]=['20%','20%','60%']
+  private provinceScroller: Scroller = new Scroller();
+  private cityScroller: Scroller = new Scroller();
 
   build() {
     SideBarContainer(SideBarContainerType.Embed) {
@@ -25,7 +29,7 @@ export struct CustomSideBar {
                   .borderRadius(5);
               }
               .width('100%')
-              .backgroundColor(this.selectedProvince === province.省 ? Color.Blue : Color.White)
+              .backgroundColor(this.selectedProvince === province.省 ? $r('app.color.button_selected_light') : Color.White)
               .alignSelf(ItemAlign.Start);
             });
           }
@@ -33,7 +37,7 @@ export struct CustomSideBar {
         .scrollable(ScrollDirection.Vertical) // 滚动方向为垂直方向
         .scrollBarColor(Color.Gray) // 滚动条颜色
         .edgeEffect(EdgeEffect.Spring) // 滚动到边沿后回弹
-        .width('50%') // 省份选择区域宽度
+        .width(this.proportion[0]) // 省份选择区域宽度
         .backgroundColor($r("app.color.apparent_background_blue"))
 
         // 右侧市级选择
@@ -47,12 +51,15 @@ export struct CustomSideBar {
                     Text(city.市名)
                       .onClick(() => {
                         this.selectedCity = city.市名; // 更新选中的城市
+                        this.cityCode=city.编码;
+                        this.showSideBar=false;
+                        console.log(`Selected Province: ${this.selectedProvince}, Selected City: ${this.selectedCity}, City Code: ${this.cityCode}`);
                       })
                       .padding(10)
                       .borderRadius(5);
                   }
                   .width('100%')
-                  .backgroundColor(this.selectedCity === city.市名 ? Color.Blue : Color.White)
+                  .backgroundColor(this.selectedCity === city.市名 ? $r('app.color.button_selected_light') : Color.White)
                   .alignSelf(ItemAlign.Start);
                 });
               }
@@ -62,9 +69,13 @@ export struct CustomSideBar {
         .scrollable(ScrollDirection.Vertical) // 滚动方向为垂直方向
         .scrollBarColor(Color.Gray) // 滚动条颜色
         .edgeEffect(EdgeEffect.Spring) // 滚动到边沿后回弹
-        .width('50%') // 市级选择区域宽度
-        .backgroundColor($r("app.color.apparent_background_blue"))
+        .width(this.proportion[1]) // 市级选择区域宽度
+        .backgroundColor($r("app.color.apparent_background_blue"));
+        SideBarMask({ showSideBar: this.showSideBar }).height('100%').width(this.proportion[2])
       }
     }
+    .sideBarWidth('100%')
+    .showSideBar(this.showSideBar)
+    .showControlButton(false)
   }
 }
