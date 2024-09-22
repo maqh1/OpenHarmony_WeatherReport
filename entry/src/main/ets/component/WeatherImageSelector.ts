@@ -61,7 +61,7 @@ const weatherIconDict: { [key: string]: string } = {
 export function getIconPath(weather: string): string {
   const iconCode = weatherIconDict[weather];
   return '/color-256/' + (iconCode !== undefined ? iconCode : '999') + '.png';
-}
+};
 
 const weatherBackgroundLabelDict: { [key: string]: string } = {
   // Sunny related
@@ -143,4 +143,4 @@ const weatherBackgroundLabelDict: { [key: string]: string } = {
 export function getBackgroundPath(weather: string): string {
   const background = weatherBackgroundLabelDict[weather];
   return '/background/' + (background !== undefined ? background : 'unknown') + '.png';
-}
+};

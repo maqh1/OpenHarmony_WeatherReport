@@ -1,4 +1,4 @@
-import {LocationSelector} from '../component/LocationSelector'
+import {LocationSelector} from '../component/LocationSelectorButton'
 import {WeatherDisplay} from '../component/WeatherDisplay'
 import {WeatherChart} from '../component/WeatherChart'
 import {CustomSideBar} from '../component/CitySelector'

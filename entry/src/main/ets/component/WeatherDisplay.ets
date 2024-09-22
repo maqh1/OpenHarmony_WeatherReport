@@ -13,7 +13,7 @@ export struct WeatherDisplay {
           .fontWeight('bold')
           .padding(10)
           .textAlign(TextAlign.Center)
-          .fontColor(Color.White)
+          .fontColor(Color.White);
 
         Text(`更新时间: ${this.response.cityInfo.updateTime}`)
           .fontSize(16)
@@ -98,6 +98,6 @@ export struct WeatherDisplay {
       .borderRadius(10);
     }
     .backgroundColor($r('app.color.background_apparent'))
-    .width('100%')
+    .width('100%');
   }
 }

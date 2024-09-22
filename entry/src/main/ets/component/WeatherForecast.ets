@@ -17,15 +17,15 @@ export struct WeatherForecast {
             .fontWeight('bold')
             .padding(10)
             .fontColor(Color.Black);
-          Blank()
+          Blank();
           Text(`${this.response.data.yesterday.week}`)
             .fontSize(15)
             .fontWeight('bold')
             .padding(10)
             .fontColor(Color.Black);
-          Blank()
+          Blank();
           Image(getIconPath(this.response.data.yesterday.type)).height('80%');
-          Blank()
+          Blank();
           // 最高气温
           Text(`${this.response.data.yesterday.high.split(' ')[1]}`)
             .fontSize(12)
@@ -61,15 +61,14 @@ export struct WeatherForecast {
               .fontWeight('bold')
               .padding(10)
               .fontColor(Color.Black);
-            Blank()
+            Blank();
             Image(getIconPath(day.type)).height('80%');
-            Blank()
+            Blank();
             // 最高气温
             Text(`${day.high.split(' ')[1]}`)
               .fontSize(12)
               .padding(10)
               .fontColor(Color.Red);
-
             // 最低气温
             Text(`${day.low.split(' ')[1]}`)
               .fontSize(12)
@@ -91,6 +90,6 @@ export struct WeatherForecast {
     }
     .backgroundColor($r('app.color.background_apparent')) // 背景颜色
     .width('100%')
-    .height('100%')
+    .height('100%');
   }
 }

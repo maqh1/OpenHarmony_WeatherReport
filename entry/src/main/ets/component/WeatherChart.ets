@@ -36,7 +36,7 @@ export struct WeatherChart {
 
   updateWhenChange(_:string):void{
     this.update();
-  }
+  };
 
   update(){
     setTimeout(() => {
