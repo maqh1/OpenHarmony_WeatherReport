@@ -3,16 +3,21 @@ import {WeatherDisplay} from '../component/WeatherDisplay'
 import {WeatherChart} from '../component/WeatherChart'
 import {CustomSideBar} from '../component/CitySelector'
 import {GetData,ApiResponse,Forecast,CityInfo,WeatherData, defaultResponse} from '../component/DataFetcher'
-import {weatherIconDict} from '../component/WeatherSVGSelector'
+import {WeatherForecast} from '../component/WeatherForecast'
+import {Background} from '../component/Background'
 
 @Entry
 @Component
 struct Index {
   @State selectedProvince: string='北京';
   @State selectedCity: string='北京';
-  @State cityCode:string='101010100';
+  @State @Watch('updateWhenChange') cityCode:string='101010100';
   @State response:ApiResponse=defaultResponse;
   @State showSideBar:boolean=false;
+
+  updateWhenChange(_:string):void{
+    this.update();
+  }
 
   update(){
     GetData(this.cityCode)
@@ -26,19 +31,22 @@ struct Index {
 
   build() {
     Stack() {
+      Background({response: this.response}).width('100%').height('100%')
+
       Column() {
-        LocationSelector({ showSideBar: this.showSideBar }); // 地址选择组件
-        WeatherDisplay({response:this.response}); // 天气显示组件
-        WeatherChart({response:this.response})
-          .height('20%')
-          .width('100%'); // 温度变化曲线组件
-        // 测试用按钮
-        Button().onClick(()=>{
-          this.update();
-        })
-        Image('/color-256/$\{weatherIconDict["晴天"}.png`').width('80%').fillColor(Color.Blue).height('50%').sourceSize({width:200,height:200}).outlineWidth('2%')
+        Scroll() {
+          Column() {
+            LocationSelector({ showSideBar: this.showSideBar }); // 地址选择组件
+            WeatherDisplay({ response: this.response}); // 天气显示组件
+            WeatherChart({ response: this.response })
+              .height('30%')
+              .width('100%'); // 温度变化曲线组件
+            // 测试用按钮
+            WeatherForecast({ response: this.response }).height('100%');
+          }
+        }.scrollable(ScrollDirection.Vertical)
       }.onAppear(()=>{
-        // this.update(); 暂时屏蔽，减少请求，增加素质
+        this.update(); //暂时屏蔽，减少请求，增加素质
       })
         .alignSelf(ItemAlign.Start)
         .height('100%')

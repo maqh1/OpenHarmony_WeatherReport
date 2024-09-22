@@ -18,6 +18,10 @@
     {
       "name": "button_color",
       "value": "#FFB8EAB9"
+    },
+    {
+      "name": "background_apparent",
+      "value": "#88FFFFFF"
     }
   ]
 }

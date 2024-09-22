@@ -8,6 +8,7 @@ export interface WeatherData {
   wendu: string;
   ganmao: string;
   forecast: Forecast[];
+  yesterday: Forecast
 }
 
 export interface Forecast {
@@ -59,7 +60,21 @@ export const defaultResponse:ApiResponse={
     quality: '',
     wendu: '',
     ganmao: '',
-    forecast: []
+    forecast: [],
+    yesterday:{
+      date: '',
+      high: '',
+      low: '',
+      ymd: '',
+      week: '',
+      sunrise: '',
+      sunset: '',
+      aqi: 0,
+      fx: '',
+      fl: '',
+      type: '',
+      notice: '',
+    }
   }
 };
 
